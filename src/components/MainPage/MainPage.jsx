@@ -75,21 +75,37 @@ const MainPage = () => {
             Islamic tradition. The well has been a source of water for over
             2,000 years and is believed to have miraculous properties.
           </p>
-          <input
-            type="number"
-            className="quantity-input"
-            placeholder="Enter quantity"
-            onChange={(e) => setAmount(e.target.value)}
-            value={amount}
-            min="0"
-          />
-          <input
-            type="email"
-            className="email-input"
-            placeholder="Enter your email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
+          <p>
+            Zamzam water is often consumed by Muslims during Hajj and Umrah
+            pilgrimages, and it is also available for purchase worldwide. It is
+            bottled and distributed to ensure that people can access this holy
+            water, which is revered for its spiritual and health benefits.
+          </p>
+          <div className="input-container">
+            <p>
+              <strong>Quantity:</strong>
+            </p>
+            <input
+              type="number"
+              className="quantity-input"
+              placeholder="Enter quantity"
+              onChange={(e) => setAmount(e.target.value)}
+              value={amount}
+              min="0"
+            />
+          </div>
+          <div className="input-container">
+            <p>
+              <strong>Email:</strong>
+            </p>
+            <input
+              type="email"
+              className="email-input"
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </div>
           <p className="price">Price: £1.00 each</p>
           <button id="buy-button" className="buy-button" onClick={buyNow}>
             Buy Now

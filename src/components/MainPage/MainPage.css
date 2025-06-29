@@ -3,9 +3,40 @@
   width: 80%;
   margin: auto;
   display: flex;
+  text-align: center;
 }
 
 .zamzam-image {
   width: 30%;
-  height: auto;
+  height: 100%;
+}
+
+.buy-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background-color: #45a049;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 468px) {
+  .main-page {
+    flex-direction: column;
+    /* width: 100%; */
+  }
+
+  .zamzam-image {
+    width: 80%;
+    margin: auto;
+  }
 }
