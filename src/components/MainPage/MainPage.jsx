@@ -4,12 +4,42 @@ import { useEffect, useState } from "react";
 
 const MainPage = () => {
   const [amount, setAmount] = useState(0);
+  const [email, setEmail] = useState("");
   const [purchases, setPurchases] = useState([]);
 
-  function buyNow() {
+  async function buyNow() {
+    const button = document.getElementById("buy-button");
+    button.disabled = true;
+    button.textContent = "Redirecting...";
+    if (amount <= 0 || !email) {
+      alert("Please enter a valid quantity and email.");
+      button.disabled = false;
+      button.textContent = "Buy Now";
+      return;
+    }
+    try {
+      console.log(`Buying ${amount} Zamzam 100ml bottles`);
+      console.log("Total cost: £" + amount * 1.0); // Assuming each bottle costs £1.00
+
+      // Assuming we have a backend endpoint to handle purchases
+      const response = await axios.post(
+        "https://e-commerce-stripe-backend.onrender.com/stripe/create-checkout-session",
+        {
+          quantity: amount,
+          email: email,
+        }
+      );
+
+      console.log("Redirecting to:", response.data.url);
+      window.location.href = response.data.url;
+
+      console.log("Purchase link:", response.data.url);
+    } catch (error) {
+      console.error("Error processing purchase:", error);
+      button.disabled = false;
+      button.textContent = "Buy Now";
+    }
     // Logic for buying the product
-    console.log(`Buying ${amount} Zamzam 100ml bottles`);
-    console.log("Total cost: £" + amount * 1.0); // Assuming each bottle costs £1.00
   }
 
   useEffect(() => {
@@ -53,8 +83,15 @@ const MainPage = () => {
             value={amount}
             min="0"
           />
+          <input
+            type="email"
+            className="email-input"
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
           <p className="price">Price: £1.00 each</p>
-          <button className="buy-button" onClick={buyNow}>
+          <button id="buy-button" className="buy-button" onClick={buyNow}>
             Buy Now
           </button>
         </div>
@@ -66,7 +103,10 @@ const MainPage = () => {
             {purchases.map((purchase, index) => (
               <li key={index} className="purchase-item">
                 <p>
-                  <strong>Quantity:</strong> {purchase.quantity} bottle{" "}
+                  <strong>Email:</strong> {purchase.buyer_email}
+                </p>
+                <p>
+                  <strong>Quantity:</strong> {purchase.quantity} bottle
                   {purchase.quantity === 1 ? "" : "s"}
                 </p>
                 <p>
