@@ -1,0 +1,11 @@
+.main-page {
+  border: 1px solid #adaeaf;
+  width: 80%;
+  margin: auto;
+  display: flex;
+}
+
+.zamzam-image {
+  width: 30%;
+  height: auto;
+}

@@ -1,8 +1,8 @@
 body {
   background-image: url("/images/background.jpg");
-  /* background-size: cover; */
+  background-size: 80vh;
   background-position: center;
   /* background-repeat: no-repeat; */
-  min-height: 100vh;
+  /* min-height: 100vh; */
   margin: 0;
 }
